@@ -1,0 +1,14 @@
+*.py[cod]
+*~
+*.swp
+*.swo
+
+
+# Everything in __pycache__
+__pycache__/
+
+
+
+
+
+
