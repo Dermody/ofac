@@ -1,0 +1,12 @@
+[I 161011 23:16:09 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.016s]
+[I 161011 23:16:09 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.008s]
+[I 161011 23:16:09 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.003s]
+[I 161011 23:16:09 web:1946] 200 POST / (104.196.96.245) 32.17ms
+[I 161011 23:20:31 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.019s]
+[I 161011 23:20:31 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.007s]
+[I 161011 23:20:31 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.007s]
+[I 161011 23:20:31 web:1946] 200 POST / (104.196.96.245) 38.13ms
+[I 161011 23:21:30 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.008s]
+[I 161011 23:21:30 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.003s]
+[I 161011 23:21:30 base:66] GET http://localhost:9200/ofac/_search [status:200 request:0.002s]
+[I 161011 23:21:30 web:1946] 200 POST / (104.196.96.245) 17.21ms

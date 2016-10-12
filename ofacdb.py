@@ -2,6 +2,7 @@
 
 from peewee import *
 import csv
+from elasticsearch import Elasticsearch
 
 database = SqliteDatabase("ofac.db")         # async doesn't seem to work with sqlite3, so synchronous for now
 
@@ -159,4 +160,26 @@ if __name__ == "__main__":
     cons_comments_file = "consolidated/cons_comments.csv"
     cons_comments_keys = ["ent_num","comments"]
     populate_db(cons_comments_file, ConsolidatedComment, cons_comments_keys)
+
+
+
+
+
+    # Now add all of these to the running elasticsearch instance
+    def add_to_es(dbclass):
+        name = dbclass.__name__
+        print("The name of this class is {}".format(name))
+        res = dbclass.select()
+        for ii in res:
+            result = es.index(index="ofac", doc_type="SDN", body=model_to_dict(ii))
+
+    es = Elasticsearch()
+
+    es.indices.delete(index=["ofac"])
+    tables = [SDN, SDNAddress, SDNAlternateIdentity, SDNComment, Consolidated, ConsolidatedAddress, ConsolidatedAlternateIdentity, ConsolidatedComment]
+    for ii in tables:
+        add_to_es(ii)
+
+
+
 
