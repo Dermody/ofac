@@ -8,9 +8,9 @@ This library contains tools for scrubbing names against the OFAC's SDN and Conso
 * elasticsearch_async
 * A functioning local ElasticSearch server. (Tested on 2.4)
 
+## License
 
-
-The software is released under the MIT license. 
+This software is released under the terms of the MIT license. 
 
 ## Description
 
