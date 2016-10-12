@@ -10,6 +10,9 @@ This project provides software that parses the SDN and Consolidated lists downlo
 
 `ofacdb.py` is a python3 script that parses the OFAC files (see the script for information on where such files need to be stored in order for the parser to find them).  It does this by creating a local sqlite database (`ofac.db`) that is then read into the elasticsearch instance.  
 
-`ofac-server.py` provides a tornado-based webserver to receive POST requests.  These requests should have as their body JSON of the form `{field: _field_name_, value: _the_value_}" where _field_name_ is one of `name`, `address` or `vessel` and _the_value_ is the string to be searched for.  
+### Serving the results of a query
+
+`ofac-server.py` provides a tornado-based webserver to receive POST requests representing database queries.  These requests should have as their body JSON of the form `{field: _field_name_, value: _the_value_}` where `_field_name_` is either `name` or `address` and `_the_value_` is the string to be searched for.  
 
 The return value of these requests are JSON with all of the information (if any) related to the search term used.  
+
