@@ -1,6 +1,16 @@
 # ofac
 
-This library contains tools for scrubbing names against the OFAC's SDN and Consolidated lists (see [here](https://www.treasury.gov/resource-center/sanctions/Pages/default.aspx)) to aid in compliance of U.S. B.S./A.M.L. regulations.  The software is released under the MIT license. 
+This library contains tools for scrubbing names against the OFAC's SDN and Consolidated lists (see [here](https://www.treasury.gov/resource-center/sanctions/Pages/default.aspx)) to aid in compliance of U.S. B.S./A.M.L. regulations.
+
+## Requirements
+* python >= 3.5
+* tornado
+* elasticsearch_async
+* A functioning local ElasticSearch server. (Tested on 2.4)
+
+
+
+The software is released under the MIT license. 
 
 ## Description
 
