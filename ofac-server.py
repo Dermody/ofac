@@ -1,7 +1,28 @@
-#  Name: ofac-server.py
-#  Author: Scott Condie (scott@sparrowai.com)
-#  Description: A server that scrubs names against the OFAC SDN and consolidated lists.
+"""
+MIT License
 
+Copyright (c) 2016 Sparrow A.I., LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
+# Contact: Scott Condie (scott@sparrowai.com)
 
 import asyncio
 import tornado.ioloop
@@ -13,6 +34,7 @@ import tornado.options
 import json
 from elasticsearch_async import AsyncElasticsearch
 from pprint import pprint
+from configparser import SafeConfigParser
 
 
 
@@ -68,11 +90,16 @@ class ReqHandler(tornado.web.RequestHandler):
 
 
 if __name__ == "__main__":
+    # This uses python's configparser module.  See https://docs.python.org/3.5/library/configparser.html for the correct format for the config file.  All entries go under the heading [server].
+    config = SafeConfigParser()
+    config.read("ofac-server.cfg")
+    cfg = config['server']
     tornado.options.parse_command_line()
     app = tornado.web.Application([(r"/", ReqHandler) ])
-    https_server = tornado.httpserver.HTTPServer(app, ssl_options={"certfile":"/etc/letsencrypt/live/stellar.network/fullchain.pem", "keyfile": "/etc/letsencrypt/live/stellar.network/privkey.pem"})
+    # Enter your encryption keys below. 
+    https_server = tornado.httpserver.HTTPServer(app, ssl_options={"certfile":cfg['certfile_location'], "keyfile": cfg['keyfile_location']})
     # Now perform some searches to make sure that this worked.  
     tornado.platform.asyncio.AsyncIOMainLoop().install()
     ioloop = asyncio.get_event_loop()
-    https_server.listen(8888)
+    https_server.listen(cfg['port'])
     ioloop.run_forever()
