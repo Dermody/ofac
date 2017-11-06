@@ -4,6 +4,7 @@ This library contains tools for scrubbing names against the OFAC's SDN and Conso
 
 ## Requirements
 * python >= 3.5
+* peewee (Tested on 2.10.1)
 * tornado
 * elasticsearch_async
 * A functioning local ElasticSearch server. (Tested on 2.4)

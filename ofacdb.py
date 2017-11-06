@@ -28,7 +28,8 @@ SOFTWARE.
 
 
 
-from peewee import *
+from peewee import SqliteDatabase, Model, IntegerField, CharField
+from playhouse.shortcuts import model_to_dict
 import csv
 from elasticsearch import Elasticsearch
 
@@ -202,8 +203,8 @@ if __name__ == "__main__":
             result = es.index(index="ofac", doc_type="SDN", body=model_to_dict(ii))
 
     es = Elasticsearch()
-
-    es.indices.delete(index=["ofac"])
+    if es.indices.exists(index="ofac"):
+        es.indices.delete(index=["ofac"])
     tables = [SDN, SDNAddress, SDNAlternateIdentity, SDNComment, Consolidated, ConsolidatedAddress, ConsolidatedAlternateIdentity, ConsolidatedComment]
     for ii in tables:
         add_to_es(ii)
